@@ -2,8 +2,7 @@
 # https://github.com/srid/emanote/blob/master/default/index.yaml
 
 page:
-  siteTitle: Emanote Template
-
+  siteTitle: Notes on nix-on-droid
 template:
   theme: red
   sidebar:

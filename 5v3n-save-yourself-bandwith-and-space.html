@@ -4,14 +4,14 @@
   <meta charset='UTF-8' />
   <meta name='viewport' content='width=device-width, initial-scale=1' />
   <title>
-    GitHub Pages – Notes on nix-on-droid
+    Save yourself bandwith and space – Notes on nix-on-droid
   </title>
   
     
       <meta property='og:description' content />
       <meta property='og:site_name' content='Notes on nix-on-droid' />
       <meta property='og:type' content='website' />
-      <meta property='og:title' content='GitHub Pages' />
+      <meta property='og:title' content='Save yourself bandwith and space' />
     
     
       <base href='/nix-on-droid-notes/' />
@@ -157,41 +157,6 @@
             
               <!-- Variable bindings for this tree-->
   
-  
-
-
-  
-
-
-<!-- Rendering of this tree -->
-<div class='pl-2'>
-  <!-- Node's rootLabel-->
-  <div class='flex items-center my-2 space-x-2 justify-left'>
-    
-    
-      <svg class='w-4 h-4 flex-shrink-0 inline' fill='none' stroke='currentColor' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'>
-        <path stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z'>
-        </path>
-      </svg>
-      
-  
-    <a class='font-bold text-red-600 hover:underline truncate' title='GitHub Pages' href='github-pages'>
-      GitHub Pages
-    </a>
-    
-      
-  </div>
-
-  <!-- Node's children forest, displayed only on active trees
-    TODO: Use <details> to toggle visibility?
-  -->
-  
-    
-  
-</div>
-            
-              <!-- Variable bindings for this tree-->
-  
     
       
     
@@ -214,7 +179,42 @@
       </svg>
     
   
-    <a class='hover:underline truncate' title='Save yourself bandwith and space' href='5v3n-save-yourself-bandwith-and-space'>
+    <a class='hover:underline truncate' title='GitHub Pages' href='github-pages'>
+      GitHub Pages
+    </a>
+    
+      
+  </div>
+
+  <!-- Node's children forest, displayed only on active trees
+    TODO: Use <details> to toggle visibility?
+  -->
+  
+    
+  
+</div>
+            
+              <!-- Variable bindings for this tree-->
+  
+  
+
+
+  
+
+
+<!-- Rendering of this tree -->
+<div class='pl-2'>
+  <!-- Node's rootLabel-->
+  <div class='flex items-center my-2 space-x-2 justify-left'>
+    
+    
+      <svg class='w-4 h-4 flex-shrink-0 inline' fill='none' stroke='currentColor' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'>
+        <path stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z'>
+        </path>
+      </svg>
+      
+  
+    <a class='font-bold text-red-600 hover:underline truncate' title='Save yourself bandwith and space' href='5v3n-save-yourself-bandwith-and-space'>
       Save yourself bandwith and space
     </a>
     
@@ -238,18 +238,46 @@
           <main class='px-4 py-4'>
             <h1 class='flex items-end justify-center mb-4 p-3 bg-red-100 text-5xl font-extrabold text-black rounded'>
   <a class='z-40 tracking-tighter '>
-    GitHub Pages
+    Save yourself bandwith and space
   </a>
 </h1>
             <article class='overflow-auto'>
   <!-- What goes in this file will appear on top of note body-->
   
     <p class='mb-3'>
-      <a href='https://pages.github.com/' class='text-red-600 hover:underline' target='_blank' rel='noopener'>GitHub Pages</a> is an easy way to deploy and host static websites on GitHub.
+      When I don’t want to redownload all packages from a remote cache I’ll use the <code class='py-0.5 px-1 rounded bg-gray-700 text-sm text-white'>--no-substitute</code> switch.
+    </p>
+  
+    <p class='mb-3'>
+      Let me dissect the following command:
+    </p>
+  <div class='py-0.5 mb-3 text-sm'><pre><code class='shell language-shell'>NIX_BUILD_SHELL=$(which bash) nix-shell shell.nix --no-substitute -I nixpkgs=file:///data/data/com.termux.nix/files/home/nixpkgs-3755a52ac8b2c5c69e67d495a0f4c5b88945a7f6.tar.gz</code></pre></div>
+    <p class='mb-3'>
+      The <code class='py-0.5 px-1 rounded bg-gray-700 text-sm text-white'>NIX_BUILD_SHELL=</code> prefix just avoids downloading bash itself from the cache.
+    </p>
+  
+    <p class='mb-3'>
+      The <code class='py-0.5 px-1 rounded bg-gray-700 text-sm text-white'>nix-shell shell.nix</code> part is just an example, could also have used nix-build here.
+    </p>
+  
+    <p class='mb-3'>
+      <code class='py-0.5 px-1 rounded bg-gray-700 text-sm text-white'>--no-substitute</code> then suppresses looking for files in one of the configured remote caches. While this is useful when I already fully built an expression and thus have all dependencies lying in a local store, it should not be used when the local store not yet contains all needed artifact i. e. prior first build.
+    </p>
+  
+    <p class='mb-3'>
+      Finally the <code class='py-0.5 px-1 rounded bg-gray-700 text-sm text-white'>-I nixpkgs=</code> suffix might contain a path to a locally downloaded archive of one of the channels. In my case here the archive’s name corresponds to the revision of the channel pinned in my sources.json as well.
+    </p>
+  
+    <p class='mb-3'>
+      There I should have all I needed when repeatedly building any kind of project be it haskell or julia just as an example and I wanted to save bandwidth as well as storage space on my device.
+    </p>
+  
+    <p class='mb-3'>
+      In another article I’ll recall how I pushed all locally built artifacts belonging to a project to some remote cache of mine to also save build times on recurrent builds again using pinned revisions.
     </p>
   
   <div class='flex items-center justify-center mt-2'>
-  <a class='text-gray-300 hover:text-red-600 text-sm' title='Edit this page on GitHub' href='https://github.com/573/nix-on-droid-notes/edit/master/content/GitHub Pages.md'>
+  <a class='text-gray-300 hover:text-red-600 text-sm' title='Edit this page on GitHub' href='https://github.com/573/nix-on-droid-notes/edit/master/content/Save yourself bandwith and space.md'>
     <svg xmlns='http://www.w3.org/2000/svg' class='h-6 w-6' fill='none' viewBox='0 0 24 24' stroke='currentColor'>
       <path stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z'></path>
     </svg>
@@ -260,28 +288,6 @@
             <div class='flex flex-col lg:flex-row lg:space-x-2'>
               
               
-  <div class='flex-1 p-4 mt-8 bg-gray-100 rounded'>
-    <header class='mb-2 text-xl font-semibold text-gray-500'>Links to this page</header>
-    <ul class='space-y-1'>
-      
-        <li>
-          <a class='text-red-600 mavenLinkBold hover:bg-red-50' href=''>
-            Notes on nix-on-droid
-          </a>
-          
-            <div class='mb-4 overflow-auto text-sm text-gray-500'>
-  
-    <div class='pl-2 mt-2 border-l-2 border-red-200 hover:border-red-500'>
-      <div><p>A template for your next <a href='https://emanote.srid.ca/' class='text-gray-600 hover:underline' target='_blank' rel='noopener'>Emanote</a> website for hosting in <a href='github-pages' class='text-gray-600 font-bold hover:bg-gray-50' data-wikilink-type='WikiLinkNormal'>GitHub Pages</a>, editing in <a href='https://emanote.srid.ca/resources/vscode' class='text-gray-600 hover:underline' target='_blank' rel='noopener'>Visual Studio Code</a>, etc.. For details, see <a href='https://github.com/srid/emanote-template' class='text-gray-600 hover:underline' target='_blank' rel='noopener'>https://github.com/srid/emanote-template</a>.</p></div>
-    </div>
-  
-</div>
-          
-        </li>
-      
-    </ul>
-  </div>
-
             </div>
             
   <section class='flex flex-wrap items-end justify-center my-4 space-x-2 space-y-2 font-mono text-sm'>
